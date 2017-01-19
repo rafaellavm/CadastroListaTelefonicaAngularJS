@@ -18,24 +18,30 @@
     
 </head>
 <body ng-controller="listaTelefonicaController">
+    {{contatos}}
     <div class="jumbotron">
         <h3 ng-bind="app"></h3>
-        <table class="table table-striped">
+        <table class="table ">
             <tr>
+                <td></td>
                 <td>Nome</td>
                 <td>Telefone</td>
+                <td>Operadora</td>
             </tr>
-            <tr ng-repeat="contato in contatos">
+            <tr ng-repeat="contato in contatos" ng-class="{selecionado : contato.selecionado, negrito: contato.selecionado}">
+                   <td><input type="checkbox" ng-model="contato.selecionado"></td>
                   <td>{{contato.nome}}</td>  
-                  <td>{{contato.telefone}}</td>  
+                  <td>{{contato.telefone}}</td> 
+                  <td>{{contato.operadora.nome}}</td>   
             </tr>
         </table>
-        <hr />
         <input type="text" ng-model="contato.nome" class="form-control" placeholder="Nome"/>
         <br />
         <input type="text" ng-model="contato.telefone" class="form-control" placeholder="Telefone"/>
-        <button ng-click="adicionarContato(contato)" class="btn btn-primary btn-block">Adicionar Contato</button>
-        {{contato.nome}} ||  {{contato.telefone}}
+        <select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras" class="form-control">
+               <option value="">Selecione uma operadora</option>
+        </select>
+        <button ng-click="adicionarContato(contato)" class="btn btn-primary btn-block" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
     </div>
 </body>
 </html>
