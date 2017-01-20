@@ -53,4 +53,26 @@ angular.module('listaTelefonica')
         $scope.contatos.push(angular.copy(contato));
         delete $scope.contato;
     };
+
+    $scope.apagarContatos = function(contatos){
+       //Ele vai atribuir ao $scope.contatos todos os que não foram selecionados. 
+
+        //o filter me permite passar uma função, essa função recebe um elemento (contato)
+        //eu analiso o contato: eu só faço o return se o contato estiver selecionado
+        //ele retorna outro array
+       $scope.contatos = contatos.filter(function(contato){
+            if (!contato.selecionado){
+                return contato;
+            }         
+        });
+        console.log($scope.contatos);
+    };
+
+    $scope.isContatoSelecionado = function(contatos){
+        //some: forma similar ao filter. Vou olhar contato a contato e vou retornar true se contato.selecionado
+        //se pelo menos um dos itens do array for true já retorna true
+        return contatos.some(function(contato){
+            return contato.selecionado;
+        });
+    };
 });
