@@ -20,18 +20,20 @@
 <body ng-controller="listaTelefonicaController">
     <div class="jumbotron">
         <h3 ng-bind="app"></h3>
-        <table class="table ">
+        <table class="table" ng-show="contatos.length > 0">
             <tr>
                 <td></td>
                 <td>Nome</td>
                 <td>Telefone</td>
                 <td>Operadora</td>
+                <td></td>
             </tr>
             <tr ng-repeat="contato in contatos" ng-class="{selecionado : contato.selecionado, negrito: contato.selecionado}">
                    <td><input type="checkbox" ng-model="contato.selecionado"></td>
                   <td>{{contato.nome}}</td>  
                   <td>{{contato.telefone}}</td> 
-                  <td>{{contato.operadora.nome}}</td>   
+                  <td>{{contato.operadora.nome}}</td>
+                  <td><div style="width: 20px; height:20px;" ng-style="{'background-color': contato.cor }"></div></td>  
             </tr>
         </table>
         <input type="text" ng-model="contato.nome" class="form-control" placeholder="Nome"/>
@@ -41,7 +43,8 @@
                <option value="">Selecione uma operadora</option>
         </select>
         <button ng-click="adicionarContato(contato)" class="btn btn-primary btn-block" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
-        <button ng-click="apagarContatos(contatos)" class="btn btn-danger btn-block" ng-disabled="!isContatoSelecionado(contatos)">Apagar Contato</button>
+        <button ng-click="apagarContatos(contatos)" class="btn btn-danger btn-block" ng-if="isContatoSelecionado(contatos)">Apagar Contato</button>
     </div>
+   <div ng-include="'footer.html'"></div>
 </body>
 </html>

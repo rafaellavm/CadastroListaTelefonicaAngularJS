@@ -6,15 +6,18 @@ angular.module('listaTelefonica')
     $scope.contatos = [
         {
              nome: 'Rafaela',
-             telefone: '99998888'
+             telefone: '99998888',
+             cor: 'blue'
         },
          {
              nome: 'Pedro',
-             telefone: '77778888'
+             telefone: '77778888',
+             cor: 'yellow'
         },
          {
              nome: 'Cinthia',
-             telefone: '66668888'
+             telefone: '66668888',
+             cor: 'red'
         }
     ];
 

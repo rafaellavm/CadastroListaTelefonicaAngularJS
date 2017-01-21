@@ -17,7 +17,8 @@
 }
 
 .selecionado{
-    background-color: yellow;
+    background-color: #666;
+    color: white;
 }
 
 .negrito{
