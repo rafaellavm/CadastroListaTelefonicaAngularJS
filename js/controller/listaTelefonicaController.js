@@ -6,18 +6,36 @@ angular.module('listaTelefonica')
     $scope.contatos = [
         {
              nome: 'Rafaela',
-             telefone: '99998888',
-             cor: 'blue'
+             telefone: '33334444',
+             cor: 'blue',
+             operadora: {
+                nome: 'Oi',
+                codigo: 14, 
+                categoria: 'Celular'
+             },
+             Data: '04102016'
         },
          {
              nome: 'Pedro',
              telefone: '77778888',
-             cor: 'yellow'
+             cor: 'yellow',
+             operadora: {
+                nome: 'Tim',
+                codigo: 15, 
+                categoria: 'Celular'
+             },
+             Data: '11202016'
         },
          {
              nome: 'Cinthia',
-             telefone: '66668888',
-             cor: 'red'
+             telefone: '99999999',
+             cor: 'red',
+             operadora: {
+                nome: 'GVT',
+                codigo: 25, 
+                categoria: 'Fixo'
+             },
+             Data: new Date()
         }
     ];
 
@@ -78,5 +96,10 @@ angular.module('listaTelefonica')
         return contatos.some(function(contato){
             return contato.selecionado;
         });
+    };
+
+    $scope.ordernarPor = function(campo){
+        $scope.criterioDeOrdenacao = campo;
+        $scope.direcaoDaOrdenacao = $scope.direcaoDaOrdenacao;
     };
 });

@@ -22,22 +22,27 @@
             <div class="col-md-12">
                 <div class="jumbotron">
                     <h3 ng-bind="app"></h3>
+                    <input type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?" class="form-control" />
                     <table class="table" ng-show="contatos.length > 0">
                         <tr>
                             <td></td>
-                            <td>Nome</td>
-                            <td>Telefone</td>
+                            <td><a href="" ng-click="ordernarPor('nome')">Nome</a></td>
+                            <td><a href="" ng-click="ordernarPor('telefone')">Telefone</a></td>
                             <td>Operadora</td>
-                            <td></td>
+                            <td>Data</td>
+                            <!--<td></td>-->
+                            
+                           <!-- direcaoDaOrdenacao:  pode colocar true também -->
                         </tr>
-                        <tr ng-repeat="contato in contatos" ng-class="{selecionado : contato.selecionado, negrito: contato.selecionado}">
+                        <tr ng-repeat="contato in contatos | filter: {nome: criterioDeBusca} | orderBy: criterioDeOrdenacao : direcaoDaOrdenacao" ng-class="{selecionado : contato.selecionado, negrito: contato.selecionado}">
                             <td><input type="checkbox" ng-model="contato.selecionado"></td>
-                            <td>{{contato.nome}}</td>
+                            <td>{{contato.nome | uppercase }}</td>
                             <td>{{contato.telefone}}</td>
-                            <td>{{contato.operadora.nome}}</td>
-                            <td>
+                            <td>{{contato.operadora.nome | lowercase}}</td>
+                            <td>{{contato.Data | date:'dd/MM/yyyy'}}</td>
+                            <!-- <td>
                                 <div style="width: 20px; height:20px;" ng-style="{'background-color': contato.cor }"></div>
-                            </td>
+                            </td>-->
                         </tr>
                     </table>
                     <!-- formulário -->
@@ -46,23 +51,26 @@
                         />
                         <input type="text" ng-model="contato.telefone" class="form-control" placeholder="Telefone" name="telefone" ng-required="true"
                             ng-pattern="/^\d{4,5}-\d{4}$/" />
-                        <select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras"
+                        <select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy: 'nome'"
                             class="form-control">
                             <option value="">Selecione uma operadora</option>
                             </select>
                     </form>
                     <!-- fim formulário -->
                     <!-- alertas -->
-                    <div ng-messages="contatoForm.nome.$error" class="alert alert-danger">
-                        <div ng-message="required">Por favor, preencha o nome.</div>
-                        <div ng-message="minlength">O campo nome deve ter no mínimo 10 caracteres.</div>
+                    <div ng-show="contatoForm.nome.$dirty" ng-messages="contatoForm.nome.$error">
+                        <div ng-message="required" class="alert alert-danger">
+                            Por favor, preencha o campo nome!
+                        </div>
+                        <div ng-message="minlength" class="alert alert-danger">
+                            O campo nome deve ter no mínimo 10 caracteres.
+                        </div>
                     </div>
-
-                    <div class="alert alert-danger" ng-show="contatoForm.$error.required && contatoForm.telefone.$dirty">
-                        Por favor, preencha o telefone.
+                    <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger">
+                        Por favor, preencha o campo telefone!
                     </div>
-                    <div class="alert alert-danger" ng-show="contatoForm.telefone.$error.pattern">
-                        Por favor, o campo telefone deve ter o formado '9999-9999'
+                    <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
+                        O campo telefone deve ter o formato DDDDD-DDDD.
                     </div>
                     <!-- fim alertas -->
                     <button ng-click="adicionarContato(contato)" class="btn btn-primary btn-block" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
