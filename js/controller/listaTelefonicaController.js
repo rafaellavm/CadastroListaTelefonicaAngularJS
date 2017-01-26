@@ -1,11 +1,11 @@
 angular.module('listaTelefonica')
-.controller('listaTelefonicaController', function($scope){
+.controller('listaTelefonicaController', function($scope, uppercaseFilter){
 
     $scope.app = 'Lista Telefônica';
 
     $scope.contatos = [
         {
-             nome: 'Rafaela',
+             nome: uppercaseFilter('Rafaela'),
              telefone: '33334444',
              cor: 'blue',
              operadora: {
@@ -43,27 +43,33 @@ angular.module('listaTelefonica')
         {
             nome: 'Oi',
             codigo: 14, 
-            categoria: 'Celular'
+            categoria: 'Celular',
+            preco: 2
         },
         {
             nome: 'Tim',
             codigo: 15, 
-            categoria: 'Celular'
+            categoria: 'Celular',
+            preco: 3
         },
         {
             nome: 'Vivo',
             codigo: 41, 
-            categoria: 'Celular'
+            categoria: 'Celular',
+            preco: 1
         },
         {
             nome: 'GVT',
             codigo: 25, 
-            categoria: 'Fixo'
+            categoria: 'Fixo',
+            preco: 2
+            
         },
         {
             nome: 'Embratel',
             codigo: 21, 
-            categoria: 'Fixo'
+            categoria: 'Fixo',
+            preco: 4
         }
     ];
 
