@@ -2,84 +2,11 @@ angular.module('listaTelefonica')
 .controller('listaTelefonicaController', function($scope, uppercaseFilter, $http){
 
     $scope.app = 'Lista Telefônica';
-
-   /* $scope.contatos = [
-        {
-             nome: uppercaseFilter('Rafaela'),
-             telefone: '33334444',
-             cor: 'blue',
-             operadora: {
-                nome: 'Oi',
-                codigo: 14, 
-                categoria: 'Celular'
-             },
-             Data: '04102016'
-        },
-         {
-             nome: 'Pedro',
-             telefone: '77778888',
-             cor: 'yellow',
-             operadora: {
-                nome: 'Tim',
-                codigo: 15, 
-                categoria: 'Celular'
-             },
-             Data: '11202016'
-        },
-         {
-             nome: 'Cinthia',
-             telefone: '99999999',
-             cor: 'red',
-             operadora: {
-                nome: 'GVT',
-                codigo: 25, 
-                categoria: 'Fixo'
-             },
-             Data: new Date()
-        }
-    ];*/
-    
     $scope.operadoras = [];
     $scope.contatos = [];
-
-/*
-    $scope.operadoras = [
-        {
-            nome: 'Oi',
-            codigo: 14, 
-            categoria: 'Celular',
-            preco: 2
-        },
-        {
-            nome: 'Tim',
-            codigo: 15, 
-            categoria: 'Celular',
-            preco: 3
-        },
-        {
-            nome: 'Vivo',
-            codigo: 41, 
-            categoria: 'Celular',
-            preco: 1
-        },
-        {
-            nome: 'GVT',
-            codigo: 25, 
-            categoria: 'Fixo',
-            preco: 2
-            
-        },
-        {
-            nome: 'Embratel',
-            codigo: 21, 
-            categoria: 'Fixo',
-            preco: 4
-        }
-    ];
-*/
-
     $scope.classe1 = "selecionado";
     $scope.classe2 = "negrito";
+    $scope.message = '';
     
     var carregarContatos = function(){
         $http.get('http://localhost:3412/contatos')
@@ -87,8 +14,8 @@ angular.module('listaTelefonica')
             $scope.contatos = success.data;
             //console.log(success);
             //console.log(success.status);
-      }, function(error,status){
-            
+      }, function(error){
+            $scope.message = 'Erro ao carregar a lista  de contatos: ', error.status, '/', error.data;
         });      
     };
     

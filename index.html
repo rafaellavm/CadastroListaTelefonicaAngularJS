@@ -21,8 +21,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                
                 <div class="jumbotron">
+                    <span class="alert alert-danger" ng-if="message.length">{{message}}</span>
                     <h3 ng-bind="app"></h3>
+                    
                     <input type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?" class="form-control" />
                     <table class="table" ng-show="contatos.length > 0">
                         <tr>
@@ -40,7 +43,7 @@
                             <td>{{contato.nome}}</td>
                             <td>{{contato.telefone}}</td>
                             <td>{{contato.operadora.nome | lowercase}}</td>
-                            <td>{{contato.Data | date:'dd/MM/yyyy'}}</td>
+                            <td>{{contato.data | date:'dd/MM/yyyy'}}</td>
                             <!-- <td>
                                 <div style="width: 20px; height:20px;" ng-style="{'background-color': contato.cor }"></div>
                             </td>-->
